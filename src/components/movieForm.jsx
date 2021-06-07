@@ -33,8 +33,10 @@ class MovieForm extends Form {
   };
 
   doSubmit = async () => {
-    await saveMovie(this.state.data);
-    this.props.history.push("/movies");
+    try {
+      await saveMovie(this.state.data);
+      this.props.history.push("/movies");
+    } catch (ex) {}
   };
 
   async populateMovies() {

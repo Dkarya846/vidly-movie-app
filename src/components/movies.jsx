@@ -114,6 +114,7 @@ class Movies extends Component {
   };
 
   render() {
+    const { user } = this.props;
     const { pageSize, currentPage, selectedGenre, sortColumn, genres } =
       this.state;
 
@@ -130,9 +131,11 @@ class Movies extends Component {
             />
           </div>
           <div className="col">
-            <Link className="btn btn-primary mb-4" to={`/movies/new`}>
-              New Movie
-            </Link>
+            {user && (
+              <Link className="btn btn-primary mb-4" to={`/movies/new`}>
+                New Movie
+              </Link>
+            )}
             <p>Showing {totalCount} movies in the database</p>
             <SearchBox
               value={this.state.searchQuery}
@@ -141,6 +144,7 @@ class Movies extends Component {
             {totalCount !== 0 ? (
               <MoviesTable
                 movies={movies}
+                user={user}
                 sortColumn={sortColumn}
                 onLike={this.handleLike}
                 onDelete={this.handleDelete}
