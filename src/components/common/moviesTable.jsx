@@ -24,15 +24,20 @@ class MoviesTable extends Component {
     },
     {
       key: "delete",
-      content: (movie) =>
-        this.props.user && (
-          <button
-            className="btn btn-danger"
-            onClick={() => this.props.onDelete(movie)}
-          >
-            Delete
-          </button>
-        ),
+      content: (movie) => {
+        if (this.props.user) {
+          return (
+            this.props.user.isAdmin && (
+              <button
+                className="btn btn-danger"
+                onClick={() => this.props.onDelete(movie)}
+              >
+                Delete
+              </button>
+            )
+          );
+        }
+      },
     },
   ];
   render() {
